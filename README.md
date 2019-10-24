@@ -25,7 +25,7 @@ WatchAD是一个完整的检测系统，涉及的内容较多，请参考 [INSTA
 
 项目架构简图：
 
-![](C:\Users\zhusiyu1\Desktop\ATA相关文档\架构图.png)
+![Architecture](./images/Architecture.png)
 
 本项目 WatchAD 只包含了检测引擎相关的代码，Web平台的前后端代码在项目 [WatchAD-Web](https://github.com/0Kee-Team/WatchAD-Web) 中。
 
