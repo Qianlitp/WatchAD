@@ -1,0 +1,11 @@
+pika==1.0.0
+simplejson==3.16.0
+elasticsearch5
+pymongo==3.7.2
+IPy==1.0
+redis==3.2.1
+ldap3==2.5.1
+dnspython==1.16.0
+python-crontab==2.3.6
+impacket
+supervisor

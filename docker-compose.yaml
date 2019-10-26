@@ -1,0 +1,61 @@
+version: '3'
+services:
+  watchad_rabbitmq:
+    image: rabbitmq:management
+    ports:
+    - "15672:15672"
+    - "5672:5672"
+    environment:
+      RABBITMQ_IO_THREAD_POOL_SIZE: 100
+      RABBITMQ_HIPE_COMPILE: "true"
+      RABBITMQ_DEFAULT_USER: WatchAD
+      RABBITMQ_DEFAULT_PASS: WatchAD-by-0KEE
+    restart: always
+
+  watchad_logstash:
+    image: logstash:6.4.1
+    ports:
+      - "5044:5044"
+    environment:
+      XPACK_MONITORING_ENABLED: "false"
+      pipeline.batch.size: 10
+    volumes:
+      - ./settings/logstash/:/usr/share/logstash/pipeline/
+    links:
+      - watchad_elasticsearch
+    restart: always
+
+  watchad_elasticsearch:
+    image: elasticsearch:5.2.1
+    environment:
+      http.host: 0.0.0.0
+      transport.host: 127.0.0.1
+      cluster.name: docker-cluster
+      bootstrap.memory_lock: "true"
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+      thread_pool.bulk.size: 9
+      thread_pool.bulk.queue_size: 1000
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    ports:
+      - "9200:9200"
+    restart: always
+
+  watchad_redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    restart: always
+
+  watchad_mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: WatchAD
+      MONGO_INITDB_ROOT_PASSWORD: WatchAD-by-0KEE

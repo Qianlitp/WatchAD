@@ -1,6 +1,6 @@
 # WatchAD
 
-[![PyPI version](https://img.shields.io/badge/Python-3.6+-blue.svg)](http://git.websec.cc/zhusiyu/dc_log_analyze) [![ElasticSearch version](https://img.shields.io/badge/ElasticSearch-5.X-success.svg)](https://www.elastic.co/guide/en/elasticsearch/reference/5.2/index.html) [![Logstash version](https://img.shields.io/badge/Logstash-6.X-yellowgreen.svg)](https://www.elastic.co/guide/en/logstash/6.2/index.html) [![RabbitMQ version](https://img.shields.io/badge/RabbitMQ-3.7-orange.svg)](https://www.rabbitmq.com/) [![DEF CON 27 Blue Team Village](https://img.shields.io/badge/DEF%20CON%2027-Blue%20Team%20Village-blue.svg)](https://www.blueteamvillage.org/home/dc27/talks#h.p_5uroKErLDdmP)
+![PyPI version](https://img.shields.io/badge/Python-3.6+-blue.svg) [![ElasticSearch version](https://img.shields.io/badge/ElasticSearch-5.X-success.svg)](https://www.elastic.co/guide/en/elasticsearch/reference/5.2/index.html) [![Logstash version](https://img.shields.io/badge/Logstash-6.X-yellowgreen.svg)](https://www.elastic.co/guide/en/logstash/6.2/index.html) [![RabbitMQ version](https://img.shields.io/badge/RabbitMQ-3.7-orange.svg)](https://www.rabbitmq.com/) [![DEF CON 27 Blue Team Village](https://img.shields.io/badge/DEF%20CON%2027-Blue%20Team%20Village-blue.svg)](https://www.blueteamvillage.org/home/dc27/talks#h.p_5uroKErLDdmP)
 
 > 域安全入侵感知系统
 
@@ -21,17 +21,37 @@ WatchAD收集所有域控上的事件日志和kerberos流量，通过特征匹�
 
 ## 安装部署
 
-WatchAD是一个完整的检测系统，涉及的内容较多，请参考 [INSTALL.md](https://github.com/0Kee-Team/WatchAD/wiki/Install) 进行安装。
+WatchAD是一个完整的检测系统，涉及的内容较多，请参考 [安装教程](https://github.com/0Kee-Team/WatchAD/wiki/Install) 进行安装。如果你需要设置蜜罐账户，也可以参考我们关于蜜罐账户的[说明](https://github.com/0Kee-Team/WatchAD/wiki/Honeypot-Account)。
 
 项目架构简图：
 
 ![Architecture](./images/Architecture.png)
 
-本项目 WatchAD 只包含了检测引擎相关的代码，Web平台的前后端代码在项目 [WatchAD-Web](https://github.com/0Kee-Team/WatchAD-Web) 中。
+本项目 WatchAD 只包含了检测引擎相关的代码，你可以选择直接将告警数据导入运营中心统一管理，或者使用我们开发的Web平台 [WatchAD-Web](https://github.com/0Kee-Team/WatchAD-Web) ，它是一个为WatchAD定制的简易平台，可进行简单的运营工作，如果你对界面设计或者操作体验有更高的要求，请根据WatchAD的告警数据格式自行定制化开发。
 
 ## 自定义检测模块
 
 WatchAD支持开发自定义的检测模块，详情请参考我们的[教程](https://github.com/0Kee-Team/WatchAD/wiki/Development)。
+
+如果你不需要某个**检测模块**，直接将**该py文件删除**并重启检测引擎即可，无需其它配置。`record`目录中的文件不参与告警检测，只负责记录域内实体的关键活动，请勿删除。
+
+## // TODO
+
+- English Document
+- ElasticSearch兼容6.X
+- 各个检测模块的误报持续优化
+- Kerberoasting：基于事件日志检测的代码被流量替代，后续可添加
+- Pass-the-Hash(PtH)：内部存在误报，暂缓开源
+- Pass-the-Ticket(PtT)：内部存在误报，暂缓开源
+- Silver-Ticket：内部存在误报，暂缓开源
+- 伪造用户信息：内部存在误报，暂缓开源
+- 基于用户行为的失陷账户检测
+- 基于Kerberos流量的分析开源
+- NTLM流量分析
+
+如果你有认为需要加入到WatchAD检测的攻击方法，请提issue告诉我们相关复现方式，或者提交PR成为本项目的贡献者。
+
+如果你发现某个检测模块有较多的误报（日均超过**10**条），请提issue告诉我们或由你优化之后提交PR。
 
 ## Follow me
 
