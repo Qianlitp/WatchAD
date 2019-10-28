@@ -17,7 +17,7 @@ WatchAD收集所有域控上的事件日志和kerberos流量，通过特征匹�
 
 > 其中标注了**流量**的检测方法暂未在本次开源计划中，后续会根据大家的反馈继续开源。
 
-
+本项目部分技术点在 [DEF CON 27 @ Blue Team Village](https://www.blueteamvillage.org/home/dc27/talks#h.p_5uroKErLDdmP) 上发表演讲。
 
 ## 安装部署
 
@@ -38,6 +38,7 @@ WatchAD支持开发自定义的检测模块，详情请参考我们的[教程](h
 ## // TODO
 
 - English Document
+- English code comment
 - ElasticSearch兼容6.X
 - 各个检测模块的误报持续优化
 - Kerberoasting：基于事件日志检测的代码被流量替代，后续可添加
@@ -55,10 +56,28 @@ WatchAD支持开发自定义的检测模块，详情请参考我们的[教程](h
 
 ## Follow me
 
-微博： [@9ian1i](https://weibo.com/u/5242748339)
-
-Github： [@9ian1i](https://github.com/Qianlitp)
+微博： [@9ian1i](https://weibo.com/u/5242748339)     Github： [@9ian1i](https://github.com/Qianlitp)    Twitter：[@9ian1i](https://twitter.com/9ian1i)
 
 ## 联系我们
 
 我们来自360信息安全部[0KEE Team](https://0kee.360.cn/)，如果你有安全工具或者安全系统开发经验，热衷于甲方安全建设，请投递简历到：zhanglu-it#360.cn、renyan-it#360.cn、zhusiyu1#360.cn。
+
+## 参考文档
+
+* [Active Directory Kill Chain Attack & Defense](https://github.com/infosecn1nja/AD-Attack-Defense)
+
+* [Active Directory Security](https://adsecurity.org/)
+* [Windows Security Log Events](https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/default.aspx?i=j)
+* [harmj0y's blog](https://blog.harmj0y.net/)
+* [event log doc](https://docs.microsoft.com/en-us/windows/security/threat-protection/auditing/event-4624)
+* [Understanding SDDL Syntax](https://itconnect.uw.edu/wares/msinf/other-help/understanding-sddl-syntax/)
+* [Escalating privileges with ACLs in Active Directory](https://blog.fox-it.com/2018/04/26/escalating-privileges-with-acls-in-active-directory/)
+* [Abusing Exchange: One API call away from Domain Admin](https://dirkjanm.io/abusing-exchange-one-api-call-away-from-domain-admin/)
+* [3gstudent's blog](https://3gstudent.github.io/3gstudent.github.io/)
+* [Penetration Testing Lab Blog]([https://pentestlab.blog](https://pentestlab.blog/))
+* [Attack Defense & Detection](https://adsecurity.org/?page_id=4031)
+
+* [INSIDER THREAT SECURITY BLOG](https://blog.stealthbits.com/)
+
+* [How to use the UserAccountControl flags to manipulate user account properties](https://support.microsoft.com/en-us/help/305144/how-to-use-useraccountcontrol-to-manipulate-user-account-properties)
+* [Advanced Threat Analytics documentation](https://docs.microsoft.com/en-us/advanced-threat-analytics/)
