@@ -60,7 +60,7 @@ WatchAD支持开发自定义的检测模块，详情请参考我们的[教程](h
 
 ## 联系我们
 
-我们来自360信息安全部[0KEE Team](https://0kee.360.cn/)，如果你有安全工具或者安全系统开发经验，热衷于甲方安全建设，请投递简历到：zhanglu-it#360.cn、renyan-it#360.cn、zhusiyu1#360.cn。
+我们来自360信息安全部[0KEE Team](https://0kee.360.cn/)，如果你有安全工具或者安全系统开发经验，热衷于甲方安全建设，请投递简历到：zhanglu-it@360.cn、renyan-it@360.cn、zhusiyu1@360.cn。
 
 ## 参考文档
 
