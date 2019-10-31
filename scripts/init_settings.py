@@ -43,7 +43,7 @@ def init_es_template():
 
 
 def init_ldap_settings(domain, server, user, password):
-    domain = get_netbios_domain(domain)
+    netbios_domain = get_netbios_domain(domain)
     logger.info("init the ldap configuration.")
     if not server.startswith("ldap://"):
         server = "ldap://" + server
@@ -52,7 +52,7 @@ def init_ldap_settings(domain, server, user, password):
         "name": "ldap"
     }
     doc = {
-        domain: {
+        netbios_domain: {
             "server": server,
             "user": user,
             "password": password,
@@ -312,6 +312,7 @@ def set_crontab_tasks():
 
 
 if __name__ == '__main__':
+    pass
     # init_es_template()
 
     # init_sensitive_groups("CORP")
@@ -319,4 +320,4 @@ if __name__ == '__main__':
     # get_all_dc_names()
     # get_all_unconstrained_delegation_users()
     # get_all_constrained_delegation_users()
-    set_crontab_tasks()
+    # set_crontab_tasks()
