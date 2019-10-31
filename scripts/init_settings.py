@@ -43,6 +43,7 @@ def init_es_template():
 
 
 def init_ldap_settings(domain, server, user, password):
+    domain = get_netbios_domain(domain)
     logger.info("init the ldap configuration.")
     if not server.startswith("ldap://"):
         server = "ldap://" + server

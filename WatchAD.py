@@ -114,7 +114,7 @@ def parse_option():
                       help="Password for LDAP search.")
     parser.add_option("--check", action="store_true", dest="check", help="检查各个数据库连接状态、消息队列状态")
     parser.add_option("--start", action="store_true", dest="start", help="启动检测引擎")
-    parser.add_option("--restart", action="store_true", dest="restart", help="重新加载动态配置信息、删除计划任务、重启检测引擎")
+    parser.add_option("--restart", action="store_true", dest="restart", help="重新加载动态配置信息、重启检测引擎")
     parser.add_option("--stop", action="store_true", dest="stop", help="停止引擎 （删除现有消息队列，防止数据量过大造成积压）")
     parser.add_option("--status", action="store_true", dest="status", help="查看当前引擎状态")
     return parser

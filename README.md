@@ -65,7 +65,6 @@ WatchAD支持开发自定义的检测模块，详情请参考我们的[教程](h
 ## 参考文档
 
 * [Active Directory Kill Chain Attack & Defense](https://github.com/infosecn1nja/AD-Attack-Defense)
-
 * [Active Directory Security](https://adsecurity.org/)
 * [Windows Security Log Events](https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/default.aspx?i=j)
 * [harmj0y's blog](https://blog.harmj0y.net/)
@@ -74,10 +73,8 @@ WatchAD支持开发自定义的检测模块，详情请参考我们的[教程](h
 * [Escalating privileges with ACLs in Active Directory](https://blog.fox-it.com/2018/04/26/escalating-privileges-with-acls-in-active-directory/)
 * [Abusing Exchange: One API call away from Domain Admin](https://dirkjanm.io/abusing-exchange-one-api-call-away-from-domain-admin/)
 * [3gstudent's blog](https://3gstudent.github.io/3gstudent.github.io/)
-* [Penetration Testing Lab Blog]([https://pentestlab.blog](https://pentestlab.blog/))
+* [Penetration Testing Lab Blog](https://pentestlab.blog)
 * [Attack Defense & Detection](https://adsecurity.org/?page_id=4031)
-
 * [INSIDER THREAT SECURITY BLOG](https://blog.stealthbits.com/)
-
 * [How to use the UserAccountControl flags to manipulate user account properties](https://support.microsoft.com/en-us/help/305144/how-to-use-useraccountcontrol-to-manipulate-user-account-properties)
 * [Advanced Threat Analytics documentation](https://docs.microsoft.com/en-us/advanced-threat-analytics/)

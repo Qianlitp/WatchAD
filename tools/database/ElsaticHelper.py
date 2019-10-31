@@ -68,7 +68,7 @@ class ElasticHelper(object):
         return self.es.indices.delete(index=index)
 
     def put_template(self, name, body, **kwargs):
-        return self.es.indices.put_template(name=name, body=body, **kwargs)
+        return self.es.indices.put_template(name=name, body=body, create=True, **kwargs)
 
     def exists_template(self, name, **kwargs) -> bool:
         return self.es.indices.exists_template(name=name, **kwargs)
