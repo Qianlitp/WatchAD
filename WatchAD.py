@@ -104,7 +104,7 @@ def usage():
 
 def parse_option():
     parser = optparse.OptionParser(usage=usage())
-    parser.add_option("--install", action="store_true", dest="install", help="执行WatchAD初始化安装，在次之前请确保已完整环境安装和配置。")
+    parser.add_option("--install", action="store_true", dest="install", help="执行WatchAD初始化安装，在次之前请确保已完成环境安装和配置。")
     parser.add_option("-d", "--domain", action="store", dest="domain", help="A FQDN domain name of detection.")
     parser.add_option("-s", "--ldap-server", action="store", dest="server",
                       help="Server address for LDAP search. e.g: dc01.corp.com")

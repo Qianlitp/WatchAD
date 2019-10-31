@@ -4,6 +4,8 @@
 
 > 域安全入侵感知系统
 
+中文文档 | [English Document](./README_en-us.md)
+
 WatchAD收集所有域控上的事件日志和kerberos流量，通过特征匹配、Kerberos协议分析、历史行为、敏感操作和蜜罐账户等方式来检测各种已知与未知威胁，功能覆盖了大部分目前的常见内网域渗透手法。该项目在360内部上线运行半年有余，发现多起威胁活动，取得了较好的效果。现决定开源系统中基于事件日志的检测部分。
 
 目前支持的具体检测功能如下：
@@ -21,7 +23,7 @@ WatchAD收集所有域控上的事件日志和kerberos流量，通过特征匹�
 
 ## 安装部署
 
-WatchAD是一个完整的检测系统，涉及的内容较多，请参考 [安装教程](https://github.com/0Kee-Team/WatchAD/wiki/Install) 进行安装。如果你需要设置蜜罐账户，也可以参考我们关于蜜罐账户的[说明](https://github.com/0Kee-Team/WatchAD/wiki/Honeypot-Account)。
+WatchAD是一个完整的检测系统，涉及的内容较多，请参考 [安装教程](https://github.com/0Kee-Team/WatchAD/wiki/Install(中文)) 进行安装。如果你需要设置蜜罐账户，也可以参考我们关于蜜罐账户的[说明](https://github.com/0Kee-Team/WatchAD/wiki/Honeypot-Account(中文))。
 
 项目架构简图：
 
@@ -31,7 +33,7 @@ WatchAD是一个完整的检测系统，涉及的内容较多，请参考 [安�
 
 ## 自定义检测模块
 
-WatchAD支持开发自定义的检测模块，详情请参考我们的[教程](https://github.com/0Kee-Team/WatchAD/wiki/Development)。
+WatchAD支持开发自定义的检测模块，详情请参考我们的[教程](https://github.com/0Kee-Team/WatchAD/wiki/Development(中文))。
 
 如果你不需要某个**检测模块**，直接将**该py文件删除**并重启检测引擎即可，无需其它配置。`record`目录中的文件不参与告警检测，只负责记录域内实体的关键活动，请勿删除。
 
