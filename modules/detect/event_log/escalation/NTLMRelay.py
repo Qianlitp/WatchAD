@@ -71,7 +71,7 @@ class NTLMRelay(DetectBase):
 
         # 根据主机名去查最近的认证IP
         last_ip = self.account_history.search_last_ip_by_workstation(work_station)
-        if not last_ip or last_ip == ip_address:
+        if not last_ip or last_ip == "unknown" or last_ip == ip_address:
             return
 
         # 二次确认，如果上次认证IP与当前IP不相同，则对主机名进行解析，判断IP是否相等
@@ -88,7 +88,8 @@ class NTLMRelay(DetectBase):
 
         return self._generate_alert_doc(relay_workstation=relay_workstation,
                                         ntlm_version=version,
-                                        resolver_ips=resolver_ips)
+                                        resolver_ips=resolver_ips,
+                                        last_ip=last_ip)
 
     def _generate_alert_doc(self, **kwargs) -> dict:
         form_data = {

@@ -69,7 +69,11 @@ class AccountHistory(object):
             "query": get_must_statement(
                 get_term_statement("event_id", 4768),
                 get_wildcard_statement("event_data.TargetUserName.keyword", workstation + "$"),
-                get_term_statement("event_data.Status.keyword", "0x0")
+                get_term_statement("event_data.Status.keyword", "0x0"),
+                get_must_statement(
+                    get_must_not_statement(get_term_statement("event_data.IpAddress.keyword", "::1")),
+                    get_must_not_statement(get_term_statement("event_data.IpAddress.keyword", "::ffff:127.0.0.1"))
+                )
             ),
             "_source": ["event_data.IpAddress"],
             "size": 1,
