@@ -21,8 +21,7 @@ services:
       pipeline.batch.size: 10
     volumes:
       - ./settings/logstash/:/usr/share/logstash/pipeline/
-    links:
-      - watchad_elasticsearch
+    network_mode: "host"
     restart: always
 
   watchad_elasticsearch:
