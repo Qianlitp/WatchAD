@@ -64,7 +64,7 @@ def start():
 
     rsp = subprocess.call("supervisord -c {root_dir}/supervisor.conf".format(root_dir=project_dir),
                           shell=True,
-                          env={"WATCHAD_ENGINE_DIR": project_dir, "ENV_WATCHAD_ENGINE_NUM": 5})
+                          env={"WATCHAD_ENGINE_DIR": project_dir, "WATCHAD_ENGINE_NUM": "5"})
     if rsp == 0:
         logger.info("Started!")
     else:
@@ -76,7 +76,7 @@ def stop():
 
     rsp = subprocess.call("supervisorctl -c {root_dir}/supervisor.conf shutdown".format(root_dir=project_dir),
                           shell=True,
-                          env={"WATCHAD_ENGINE_DIR": project_dir, "ENV_WATCHAD_ENGINE_NUM": 5})
+                          env={"WATCHAD_ENGINE_DIR": project_dir, "WATCHAD_ENGINE_NUM": "5"})
 
     if rsp == 0:
         logger.info("Stopped!")
