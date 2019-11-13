@@ -60,7 +60,6 @@ class RedisConfig(object):
 
 
 # rabbit mq
-# TODO 开源时修改所有配置
 class MqConfig(object):
     """
         消息队列配置

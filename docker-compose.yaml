@@ -34,6 +34,7 @@ services:
       ES_JAVA_OPTS: "-Xms512m -Xmx512m"
       thread_pool.bulk.size: 9
       thread_pool.bulk.queue_size: 1000
+      xpack.security.enabled: "false"
     ulimits:
       memlock:
         soft: -1

@@ -6,7 +6,7 @@
 
 English Document | [中文文档](./README_zh-cn.md)
 
-After Collecting event logs and kerberos traffic on all domain controls, WatchAD can detect a variety of known or unknown threats through features matching, Kerberos protocol analysis, historical behaviors, sensitive operations, honeypot accounts and so on.The WatchAD rules cover the many common AD attacks.
+After Collecting event logs and kerberos traffic on all domain controllers, WatchAD can detect a variety of known or unknown threats through features matching, Kerberos protocol analysis, historical behaviors, sensitive operations, honeypot accounts and so on.The WatchAD rules cover the many common AD attacks.
 
 The WatchAD has been running well on the Qihoo 360 intranet for more than six months and has found several threat activities.
 
@@ -46,6 +46,7 @@ If you don't need some module，You can **delete** the module's `.py` file direc
 
 ## // TODO
 
+- English code comment
 - Compatible with ElasticSearch 6.X
 - Reduce false positives
 - **Kerberoasting**: the detection based on event log was replaced by kerberos traffic analysis. We are considering add it back.

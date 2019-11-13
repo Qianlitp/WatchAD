@@ -74,14 +74,19 @@ def start():
 def stop():
     logger.info("Stopping the WatchAD detect engine ...")
 
-    rsp = subprocess.call("supervisorctl -c {root_dir}/supervisor.conf shutdown".format(root_dir=project_dir),
-                          shell=True,
-                          env={"WATCHAD_ENGINE_DIR": project_dir, "WATCHAD_ENGINE_NUM": "5"})
-
-    if rsp == 0:
-        logger.info("Stopped!")
+    stop_rsp = subprocess.call("supervisorctl -c {root_dir}/supervisor.conf stop all".format(root_dir=project_dir),
+                               shell=True, env={"WATCHAD_ENGINE_DIR": project_dir, "WATCHAD_ENGINE_NUM": "5"})
+    if stop_rsp == 0:
+        logger.info("Stopped detection processes.")
     else:
         logger.error("Stop failed.")
+    shutdown_rsp = subprocess.call("supervisorctl -c {root_dir}/supervisor.conf shutdown".format(root_dir=project_dir),
+                                   shell=True, env={"WATCHAD_ENGINE_DIR": project_dir, "WATCHAD_ENGINE_NUM": "5"})
+
+    if shutdown_rsp == 0:
+        logger.info("Shutdown WatchAD.")
+    else:
+        logger.error("Shutdown WatchAD failed.")
 
 
 def restart():
@@ -104,19 +109,20 @@ def usage():
 
 def parse_option():
     parser = optparse.OptionParser(usage=usage())
-    parser.add_option("--install", action="store_true", dest="install", help="执行WatchAD初始化安装，在次之前请确保已完成环境安装和配置。")
-    parser.add_option("-d", "--domain", action="store", dest="domain", help="A FQDN domain name of detection.")
+    parser.add_option("--install", action="store_true", dest="install", help="Initial install WatchAD.")
+    parser.add_option("-d", "--domain", action="store", dest="domain", help="A FQDN domain name. e.g: corp.360.cn")
     parser.add_option("-s", "--ldap-server", action="store", dest="server",
                       help="Server address for LDAP search. e.g: dc01.corp.com")
     parser.add_option("-u", "--domain-user", action="store", dest="username",
                       help="Username for LDAP search. e.g: CORP\\peter")
     parser.add_option("-p", "--domain-passwd", action="store", dest="password",
                       help="Password for LDAP search.")
-    parser.add_option("--check", action="store_true", dest="check", help="检查各个数据库连接状态、消息队列状态")
-    parser.add_option("--start", action="store_true", dest="start", help="启动检测引擎")
-    parser.add_option("--restart", action="store_true", dest="restart", help="重新加载动态配置信息、重启检测引擎")
-    parser.add_option("--stop", action="store_true", dest="stop", help="停止引擎 （删除现有消息队列，防止数据量过大造成积压）")
-    parser.add_option("--status", action="store_true", dest="status", help="查看当前引擎状态")
+    parser.add_option("--check", action="store_true", dest="check", help="check environment status")
+    parser.add_option("--start", action="store_true", dest="start", help="start WatchAD detection engine")
+    parser.add_option("--restart", action="store_true", dest="restart", help="restart WatchAD detection engine")
+    parser.add_option("--stop", action="store_true", dest="stop",
+                      help="stop WatchAD detection engine and shutdown supervisor")
+    parser.add_option("--status", action="store_true", dest="status", help="show processes status using supervisor")
     return parser
 
 

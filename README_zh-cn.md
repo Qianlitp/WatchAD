@@ -39,7 +39,6 @@ WatchAD支持开发自定义的检测模块，详情请参考我们的[教程](h
 
 ## // TODO
 
-- English Document
 - English code comment
 - ElasticSearch兼容6.X
 - 各个检测模块的误报持续优化
