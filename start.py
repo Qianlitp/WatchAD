@@ -110,9 +110,9 @@ class Engine(object):
             code = module["code"]
             if alert_code and alert_code != code:
                 continue
-            m_class = module["class"]
+            m_object = module["object"]
             # 运行检测模块的语句
-            alert_doc = m_class().run(data)
+            alert_doc = m_object.run(data)
             if alert_doc:
                 # 存在问题，告警
                 self.alert.generate(alert_doc)
@@ -138,7 +138,7 @@ class Engine(object):
             for d_type in data_types:
                 _register_module(d_type, {
                     "code": getattr(module, "ALERT_CODE") if hasattr(module, "ALERT_CODE") else None,
-                    "class": getattr(module, f)
+                    "object": getattr(module, f)()
                 })
         return modules_map
 
