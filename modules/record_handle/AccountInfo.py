@@ -32,6 +32,8 @@ REDIS_KEY_USERNAME_WORKSTATION_SUFFIX = "_username_to_workstation"
 REDIS_KEY_SID_IS_ADMIN_SUFFIX = "_sid_is_admin"
 # 通过username查询该账户是否支持AES的键后缀
 REDIS_KEY_USERNAME_AES_SUPPORT_SUFFIX = "_username_aes_support"
+# 通过sid查该账户是否为敏感账户的键后缀
+REDIS_KEY_SID_SENSITIVE_SUFFIX = "_sid_sensitive"
 
 
 class AccountInfo(object):
@@ -183,6 +185,9 @@ class AccountInfo(object):
             2. 属于敏感组
             3. 蜜罐账户
             4. 自定义敏感用户
+
+            LDAP查询是性能瓶颈，需要使用redis进行缓存加速
+
         """
         # 蜜罐账户
         for user in main_config.honeypot_account:
@@ -194,14 +199,22 @@ class AccountInfo(object):
             if user["sid"] == sid:
                 return True
 
+        # 先查缓存
+        _cache_is_sensitive = self.get_target_sensitive_cache(sid)
+        if _cache_is_sensitive is not None:
+            return _cache_is_sensitive == "true"
+
+        # LDAP 查询较慢，性能瓶颈
         ldap = LDAPSearch(domain)
         user_entry = ldap.search_by_sid(sid, attributes=["adminCount", "memberOf"])
         if not user_entry:
+            self.set_target_sensitive_cache(sid, "false")
             return False
 
         # adminCount
         if len(user_entry.entry_attributes_as_dict["adminCount"]) > 0 and \
                 user_entry.entry_attributes_as_dict["adminCount"][0] == 1:
+            self.set_target_sensitive_cache(sid, "true")
             return True
 
         # 敏感组
@@ -210,7 +223,9 @@ class AccountInfo(object):
         for g in groups:
             g_name = get_cn_from_dn(g)
             if g_name in sensitive_groups:
+                self.set_target_sensitive_cache(sid, "true")
                 return True
+        self.set_target_sensitive_cache(sid, "false")
         return False
 
     def computer_is_sensitive_by_name(self, name: str, domain: str) -> bool:
@@ -232,6 +247,13 @@ class AccountInfo(object):
 
         return False
 
+    def set_target_sensitive_cache(self, sid, value):
+        key = sid + REDIS_KEY_SID_SENSITIVE_SUFFIX
+        self.redis.set_str_value(key, value, expire=60*60*24*7)
 
+    def get_target_sensitive_cache(self, sid):
+        key = sid + REDIS_KEY_SID_SENSITIVE_SUFFIX
+        data = self.redis.get_str_value(key)
+        return data
 
 

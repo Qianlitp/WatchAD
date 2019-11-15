@@ -13,6 +13,7 @@ from settings.config import main_config
 from models.Log import Log
 from modules.detect.DetectBase import DetectBase, HIGH_LEVEL
 from tools.common.common import get_cn_from_dn
+from modules.record_handle.AccountInfo import AccountInfo
 
 EVENT_ID = [4728, 4732, 4756]
 
@@ -25,6 +26,7 @@ DESC_TEMPLATE = "来自于 [source_ip]([source_workstation]) 使用身份 [sourc
 class ModifySensitiveGroup(DetectBase):
     def __init__(self):
         super().__init__(code=ALERT_CODE, title=TITLE, desc=DESC_TEMPLATE)
+        self.account_info = AccountInfo()
 
     def run(self, log: Log):
         self.init(log=log)
@@ -33,6 +35,8 @@ class ModifySensitiveGroup(DetectBase):
 
         sensitive_groups = list(map(lambda x: x["name"], main_config.sensitive_groups))
         if group_name in sensitive_groups:
+            # 添加到了敏感组，更新redis缓存
+            self.account_info.set_target_sensitive_cache(self.log.event_data["MemberSid"], "true")
             return self._generate_alert_doc()
 
     def _generate_alert_doc(self, **kwargs) -> dict:

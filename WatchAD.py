@@ -22,6 +22,8 @@ from scripts.init_settings import init_es_template, check_es_template, check_mon
     init_ldap_settings, init_default_settings, get_all_dc_names, set_learning_end_time_setting, init_sensitive_groups, \
     set_crontab_tasks
 
+ENGINE_PROCESS_NUM = 5
+
 
 def install(domain, server, user, password):
     logger.info("Install the WatchAD ...")
@@ -64,7 +66,7 @@ def start():
 
     rsp = subprocess.call("supervisord -c {root_dir}/supervisor.conf".format(root_dir=project_dir),
                           shell=True,
-                          env={"WATCHAD_ENGINE_DIR": project_dir, "WATCHAD_ENGINE_NUM": "5"})
+                          env={"WATCHAD_ENGINE_DIR": project_dir, "WATCHAD_ENGINE_NUM": str(ENGINE_PROCESS_NUM)})
     if rsp == 0:
         logger.info("Started!")
     else:
@@ -75,13 +77,15 @@ def stop():
     logger.info("Stopping the WatchAD detect engine ...")
 
     stop_rsp = subprocess.call("supervisorctl -c {root_dir}/supervisor.conf stop all".format(root_dir=project_dir),
-                               shell=True, env={"WATCHAD_ENGINE_DIR": project_dir, "WATCHAD_ENGINE_NUM": "5"})
+                               shell=True, env={"WATCHAD_ENGINE_DIR": project_dir,
+                                                "WATCHAD_ENGINE_NUM": str(ENGINE_PROCESS_NUM)})
     if stop_rsp == 0:
         logger.info("Stopped detection processes.")
     else:
         logger.error("Stop failed.")
     shutdown_rsp = subprocess.call("supervisorctl -c {root_dir}/supervisor.conf shutdown".format(root_dir=project_dir),
-                                   shell=True, env={"WATCHAD_ENGINE_DIR": project_dir, "WATCHAD_ENGINE_NUM": "5"})
+                                   shell=True, env={"WATCHAD_ENGINE_DIR": project_dir,
+                                                    "WATCHAD_ENGINE_NUM": str(ENGINE_PROCESS_NUM)})
 
     if shutdown_rsp == 0:
         logger.info("Shutdown WatchAD.")
