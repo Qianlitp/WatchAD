@@ -30,7 +30,7 @@ class CloseLogService(DetectBase):
         }
         doc = self._get_base_doc(
             level=self._get_level(),
-            unique_id=self._get_unique_id(self.code, self.log.subject_info.user_name),
+            unique_id=self._get_unique_id(self.code, self.log.dc_host_name),
             form_data=form_data
         )
         return doc
