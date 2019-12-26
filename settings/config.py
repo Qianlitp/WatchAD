@@ -128,7 +128,7 @@ class MainConfig(object):
     # 高危服务前缀，用于判断离线票据破解的相关危险程度, 以下是默认的列表，可根据需要添加
     @property
     def high_risk_spn_prefix(self) -> list:
-        return self.kerberos()["high_risk_spn_prefix_setting"]
+        return self.kerberos()["high_risk_spn_prefix"]
 
     # 高危kerberos限定委派服务前缀，以下是默认的列表，可根据需要添加
     @property

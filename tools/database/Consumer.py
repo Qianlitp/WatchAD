@@ -32,7 +32,7 @@ class Consumer(object):
                 host=MqConfig.host,
                 port=MqConfig.port,
                 credentials=self.auth,
-                heartbeat=0
+                heartbeat=600
             ))
             return True
         except Exception as e:
@@ -49,10 +49,10 @@ class Consumer(object):
             heartbeat=0
         ))
         self.channel = self.connection.channel()
+        self.channel.basic_qos(prefetch_count=1)
         self.channel.exchange_declare(exchange=MqConfig.exchange, exchange_type=MqConfig.exchange_type, durable=True)
         self.channel.queue_declare(queue=MqConfig.main_queue, durable=True)
         self.channel.queue_bind(exchange=MqConfig.exchange, queue=MqConfig.main_queue)
-        self.channel.basic_qos(prefetch_count=1)
         self.channel.basic_consume(queue=MqConfig.main_queue, on_message_callback=self.callback, auto_ack=True)
 
     def run(self, handle_func):
