@@ -91,8 +91,8 @@ class DCShadow(DetectBase):
         """
         # 目标服务器为已知的域控计算机名 则忽略
         target_computer_name = log.target_info.user_name[:-1]
-        target_domain = log.target_info.domain_name
-        if target_computer_name in main_config.dc_name_list[get_netbios_domain(target_domain)]:
+        target_domain = get_netbios_domain(log.target_info.domain_name)
+        if target_domain not in main_config.dc_name_list or target_computer_name in main_config.dc_name_list[target_domain]:
             return
 
         spn_list = log.event_data["ServicePrincipalNames"].split("\n\t\t")
@@ -120,8 +120,8 @@ class DCShadow(DetectBase):
         if not target_computer_name:
             return
         target_computer_name = target_computer_name[0]
-        target_domain = log.event_data["DSName"]
-        if target_computer_name in main_config.dc_name_list[get_netbios_domain(target_domain)]:
+        target_domain = get_netbios_domain(log.event_data["DSName"])
+        if target_domain not in main_config.dc_name_list or target_computer_name in main_config.dc_name_list[target_domain]:
             return
 
         rule_list = ["CN=Default-First-Site-Name", "CN=Sites", "CN=Configuration", "CN=Servers"]
@@ -146,8 +146,8 @@ class DCShadow(DetectBase):
         if not target_computer_name:
             return
         target_computer_name = target_computer_name[0]
-        target_domain = log.event_data["DSName"]
-        if target_computer_name in main_config.dc_name_list[get_netbios_domain(target_domain)]:
+        target_domain = get_netbios_domain(log.event_data["DSName"])
+        if target_domain not in main_config.dc_name_list or target_computer_name in main_config.dc_name_list[target_domain]:
             return
 
         rule_list = ["CN=Servers", "CN=Default-First-Site-Name", "CN=Sites", "CN=Configuration"]
@@ -172,10 +172,9 @@ class DCShadow(DetectBase):
         if not target_computer_name:
             return
         target_computer_name = target_computer_name[0]
-        target_domain = log.event_data["DSName"]
-        if target_computer_name in main_config.dc_name_list[get_netbios_domain(target_domain)]:
+        target_domain = get_netbios_domain(log.event_data["DSName"])
+        if target_domain not in main_config.dc_name_list or target_computer_name in main_config.dc_name_list[target_domain]:
             return
-
         rule_list = ["CN=NTDS Settings", "CN=Servers", "CN=Default-First-Site-Name", "CN=Sites", "CN=Configuration"]
         if log.object_info.class_ == "nTDSDSA":
             for rule in rule_list:
@@ -199,7 +198,7 @@ class DCShadow(DetectBase):
             return
         source_computer = source_computer[0]
         netbios_domain = get_netbios_domain(source_domain)
-        if source_computer in main_config.dc_name_list[netbios_domain]:
+        if netbios_domain not in main_config.dc_name_list or source_computer in main_config.dc_name_list[netbios_domain]:
             return
 
         # 如果当前的源地址不在已知的DC列表中，则告警
