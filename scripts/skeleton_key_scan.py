@@ -20,8 +20,8 @@ home_path = "/".join(now_path.split("/")[:-2])
 sys.path.append(home_path)
 sys.path.append(home_path + "/libs")
 
-from kek.ccache import CCache, get_tgt_cred, kdc_rep2ccache
-from kek.krb5 import build_as_req, build_tgs_req, send_req, recv_rep, \
+from libs.kek.ccache import CCache, get_tgt_cred, kdc_rep2ccache
+from libs.kek.krb5 import build_as_req, build_tgs_req, send_req, recv_rep, \
     decrypt_as_rep, decrypt_tgs_rep, AD_WIN2K_PAC, decode, KrbError, KDC_ERR_ETYPE_NOSUPP, AES256
 from settings.config import main_config
 from tools.LDAPSearch import LDAPSearch

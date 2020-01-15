@@ -66,8 +66,10 @@ class SearchUserDetail(DetectBase):
             return
 
         ldap = LDAPSearch(domain_name)
-        target_user_name = str(ldap.search_by_sid(target_sid, attributes=["cn"])["cn"])
-
+        target = ldap.search_by_sid(target_sid, attributes=["cn"])
+        if not target:
+            return
+        target_user_name = str(target["cn"])
         return self._generate_alert_doc(target_user_name=target_user_name)
 
     def _generate_alert_doc(self, **kwargs) -> dict:

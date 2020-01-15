@@ -17,7 +17,7 @@ from libs.pyasn1.type.namedtype import NamedTypes, NamedType, OptionalNamedType
 from libs.pyasn1.type.tag import Tag, tagClassContext, tagClassApplication, tagFormatSimple
 from libs.pyasn1.type.univ import Integer, Sequence, SequenceOf, OctetString, BitString, Boolean
 from libs.pyasn1.type.useful import GeneralizedTime
-from .crypto import encrypt, decrypt, checksum, RC4_HMAC, RSA_MD5
+from .crypto import encrypt, decrypt, checksum, RC4_HMAC, RSA_MD5, AES256
 from .util import epoch2gt
 
 KDC_ERR_ETYPE_NOSUPP = 14
