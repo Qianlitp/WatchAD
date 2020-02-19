@@ -47,7 +47,8 @@ class EnumerateGroup(DetectBase):
             return
 
         # 如果账号是管理员 直接忽略
-        if self.account_info.check_target_is_admin_by_sid(sid=sid, domain=log.subject_info.domain_name):
+        if self.account_info.check_target_is_admin_by_sid(sid=log.subject_info.user_sid,
+                                                          domain=log.subject_info.domain_name):
             return
 
         # 判断账号是否为 Users，如果不是，直接退出
