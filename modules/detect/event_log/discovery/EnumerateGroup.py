@@ -37,8 +37,9 @@ class EnumerateGroup(DetectBase):
 
         if log.object_info.type != "SAM_GROUP":
             return
-
-        sid = log.object_info.name
+            
+        # 取事件发起的用户sid
+        sid = log.subject_info.user_sid
         if not sid.startswith("S-1-5-21-"):
             return
 
@@ -53,20 +54,9 @@ class EnumerateGroup(DetectBase):
         # 判断账号是否为 Users，如果不是，直接退出
         if not self.account_info.check_target_is_user_by_name(user_name, log.subject_info.domain_name):
             return
+        # 验证cn无意义
+        return self._generate_alert_doc(group_name=group_name)
 
-        group_name = self._get_group_name(sid, log.subject_info.domain_name)
-        if not group_name:
-            return
-
-        sensitive_groups = list(map(lambda x: x["name"], main_config.sensitive_groups))
-        if group_name in sensitive_groups:
-            return self._generate_alert_doc(group_name=group_name)
-
-    def _get_group_name(self, sid, domain):
-        ldap = LDAPSearch(domain)
-        entry = ldap.search_by_sid(sid, attributes=["cn"])
-        if entry:
-            return str(entry["cn"])
 
     def _generate_alert_doc(self, **kwargs) -> dict:
         source_ip = self._get_source_ip_by_logon_id(self.log.subject_info.logon_id, self.log.subject_info.full_user_name)
