@@ -47,7 +47,7 @@ class HoneypotUser(DetectBase):
         }
         doc = self._get_base_doc(
             level=self._get_level(),
-            unique_id=self._get_unique_id(self.code, kwargs["workstation"]),
+            unique_id=self._get_unique_id(self.code, kwargs["source_workstation"]),
             form_data=form_data
         )
         return doc
