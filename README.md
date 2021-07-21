@@ -66,10 +66,6 @@ If you find that a detection module has many false positives (more than 10 per d
 
 Github: [@9ian1i](https://github.com/Qianlitp) Twitter: [@9ian1i](https://twitter.com/9ian1i)
 
-## Contact us
-
-We come from 360 [0KEE Team](https://0kee.360.cn/), if you have security tools or security system development experience , have passionate about security construction, please post your resume to: zhanglu-it#360.cn, renyan-it #360.cn, zhusiyu1#360.cn.
-
 ## Reference
 
 * [Active Directory Kill Chain Attack & Defense](https://github.com/infosecn1nja/AD-Attack-Defense)
