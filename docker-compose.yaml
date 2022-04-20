@@ -25,7 +25,7 @@ services:
     restart: always
 
   watchad_elasticsearch:
-    image: elasticsearch:5.2.1
+    image: elasticsearch:5.3.1
     environment:
       http.host: 0.0.0.0
       transport.host: 127.0.0.1
